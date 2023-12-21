@@ -1,19 +1,38 @@
-var promptSync = require('prompt-sync')();
-var number_1 = parseFloat(promptSync("Enter your first number: "));
-var number_2 = parseFloat(promptSync("Enter your second number: "));
-var operator = promptSync("Enter your operator (+, -, *, /): ");
-if (operator === "+") {
-    console.log("Your answer of ".concat(number_1, " ").concat(operator, " ").concat(number_2, " = ").concat(number_1 + number_2));
-}
-else if (operator === "-") {
-    console.log("Your answer of ".concat(number_1, " ").concat(operator, " ").concat(number_2, " = ").concat(number_1 - number_2));
-}
-else if (operator === "*") {
-    console.log("Your answer of ".concat(number_1, " ").concat(operator, " ").concat(number_2, " = ").concat(number_1 * number_2));
-}
-else if (operator === "/") {
-    console.log("Your answer of ".concat(number_1, " ").concat(operator, " ").concat(number_2, " = ").concat(number_1 / number_2));
-}
-else {
-    console.log("Please select a valid operator (+, -, *, /)");
-}
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const inquirer_1 = __importDefault(require("inquirer"));
+(async () => {
+    let user = await inquirer_1.default.prompt([
+        {
+            type: "number",
+            name: "firstNumber",
+            message: "Kindly enter your first number"
+        },
+        {
+            type: "number",
+            name: "secondNumber",
+            message: "Kindly enter your second number"
+        },
+        {
+            type: "list",
+            name: "operator",
+            message: "Select your operator",
+            choices: ["+", "-", "*", "/"]
+        },
+    ]);
+    console.log(user);
+    if (user.operator === "+")
+        console.log(`Your answer of ${user.firstNumber + user.secondNumber}`);
+    else if (user.operator === "-")
+        console.log(`Your answer of ${user.firstNumber - user.secondNumber}`);
+    else if (user.operator === "*")
+        console.log(`Your answer of ${user.firstNumber * user.secondNumber}`);
+    else if (user.operator === "/")
+        console.log(`Your answer of ${user.firstNumber / user.secondNumber}`);
+    else {
+        console.log("Please select a valid operator (+, -, *, /)");
+    }
+})();

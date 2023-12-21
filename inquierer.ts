@@ -1,17 +1,36 @@
-const promptSync = require('prompt-sync')();
+import inquirer from 'inquirer';
 
-let number_1 = parseFloat(promptSync("Enter your first number: "));
-let number_2 = parseFloat(promptSync("Enter your second number: "));
-let operator = promptSync("Enter your operator (+, -, *, /): ");
+(async () => {
+    let user = await inquirer.prompt([
+        {
+            type: "number",
+            name: "firstNumber",
+            message: "Kindly enter your first number"
+        },
+        {
+            type: "number",
+            name: "secondNumber",
+            message: "Kindly enter your second number"
+        },
+        {
+            type: "list",
+            name: "operator",
+            message: "Select your operator",
+            choices: ["+", "-", "*", "/"]
+        },
+    ]);
 
-if (operator === "+") {
-    console.log(`Your answer of ${number_1} ${operator} ${number_2} = ${number_1 + number_2}`);
-} else if (operator === "-") {
-    console.log(`Your answer of ${number_1} ${operator} ${number_2} = ${number_1 - number_2}`);
-} else if (operator === "*") {
-    console.log(`Your answer of ${number_1} ${operator} ${number_2} = ${number_1 * number_2}`);
-} else if (operator === "/") {
-    console.log(`Your answer of ${number_1} ${operator} ${number_2} = ${number_1 / number_2}`);
-} else {
-    console.log("Please select a valid operator (+, -, *, /)");
-}
+    console.log(user);
+
+    if (user.operator === "+")
+        console.log(`Your answer of ${user.firstNumber + user.secondNumber}`);
+    else if (user.operator === "-")
+        console.log(`Your answer of ${user.firstNumber - user.secondNumber}`);
+    else if (user.operator === "*")
+        console.log(`Your answer of ${user.firstNumber * user.secondNumber}`);
+    else if (user.operator === "/")
+        console.log(`Your answer of ${user.firstNumber / user.secondNumber}`);
+    else {
+        console.log("Please select a valid operator (+, -, *, /)");
+    }
+})();
