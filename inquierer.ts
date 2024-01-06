@@ -1,36 +1,26 @@
+// npm i inquirer 
+// @types/inquirer 
+// install this before coding 
+
+
 import inquirer from 'inquirer';
 
-(async () => {
-    let user = await inquirer.prompt([
-        {
-            type: "number",
-            name: "firstNumber",
-            message: "Kindly enter your first number"
-        },
-        {
-            type: "number",
-            name: "secondNumber",
-            message: "Kindly enter your second number"
-        },
-        {
-            type: "list",
-            name: "operator",
-            message: "Select your operator",
-            choices: ["+", "-", "*", "/"]
-        },
-    ]);
+(async ()=>
+{
+const systemGeneratedNo = Math.floor(Math.random() * 10) + 1;
 
-    console.log(user);
 
-    if (user.operator === "+")
-        console.log(`Your answer of ${user.firstNumber + user.secondNumber}`);
-    else if (user.operator === "-")
-        console.log(`Your answer of ${user.firstNumber - user.secondNumber}`);
-    else if (user.operator === "*")
-        console.log(`Your answer of ${user.firstNumber * user.secondNumber}`);
-    else if (user.operator === "/")
-        console.log(`Your answer of ${user.firstNumber / user.secondNumber}`);
-    else {
-        console.log("Please select a valid operator (+, -, *, /)");
-    }
+const { userGuess }: { userGuess: number } = await inquirer.prompt({
+    type: "number",
+    name: "userGuess",
+    message: "Guess the number (between 1 and 10):"
+});
+
+// Check if the user's guess matches the system-generated number
+if (userGuess === systemGeneratedNo) {
+    console.log("Congratulations! You guessed it right.");
+} else {
+    console.log(`Oops! The correct number was ${systemGeneratedNo}. Better luck next time!`);
+
+}
 })();
